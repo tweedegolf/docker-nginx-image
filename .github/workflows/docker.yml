@@ -14,7 +14,7 @@ jobs:
           - nginx_version: stable
             nginx_package_src: "https://nginx.org/packages/debian/"
             latest: false
-    uses: "tweedegolf/actions-container-helpers/.github/workflows/container-image.yml@main"
+    uses: "tweedegolf/actions-helpers/.github/workflows/container-image.yml@main"
     with:
         push: ${{ github.ref == 'refs/heads/main' }}
         platforms: "linux/amd64,linux/arm64"
