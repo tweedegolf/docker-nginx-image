@@ -14,12 +14,18 @@ jobs:
           - nginx_version: stable
             nginx_package_src: "https://nginx.org/packages/debian/"
             latest: false
-    uses: "tweedegolf/actions-helpers/.github/workflows/container-image.yml@main"
-    with:
-        push: ${{ github.ref == 'refs/heads/main' }}
-        platforms: "linux/amd64,linux/arm64"
-        build-args: |
-          NGINX_PACKAGE_SRC=${{matrix.nginx_package_src}}
-        tags: |
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
+
+      - name: Build container image
+        uses: tweedegolf/build-container-image@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          push: ${{ github.ref == 'refs/heads/main' }}
+          platforms: "linux/amd64,linux/arm64"
+          build-args: |
+            NGINX_PACKAGE_SRC=${{matrix.nginx_package_src}}
+          tags: |
             ghcr.io/tweedegolf/nginx:${{matrix.nginx_version}}
             ${{ matrix.latest && 'ghcr.io/tweedegolf/nginx:latest' || '' }}
