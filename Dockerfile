@@ -1,4 +1,4 @@
-FROM ghcr.io/tweedegolf/debian:bookworm
+FROM ghcr.io/tweedegolf/debian:trixie
 
 ARG NGINX_PACKAGE_SRC="https://nginx.org/packages/debian/"
 
